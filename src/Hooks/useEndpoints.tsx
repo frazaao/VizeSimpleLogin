@@ -63,7 +63,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
   async function POSTLOGIN({ email, password }: POSTLOGINPROPS) {
     const response = await fetch(
-      'http://restapi.adequateshop.com/api/authaccount/login',
+      'https://restapi.adequateshop.com/api/authaccount/login',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -88,7 +88,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
   async function POSTREGISTER({ email, password, name }: POSTREGISTERPROPS) {
     const response = await fetch(
-      'http://restapi.adequateshop.com/api/authaccount/registration',
+      'https://restapi.adequateshop.com/api/authaccount/registration',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -110,7 +110,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
   async function GETUSERS() {
     const response = await fetch(
-      'http://restapi.adequateshop.com/api/users?page=1',
+      'https://restapi.adequateshop.com/api/users?page=1',
       {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` }
