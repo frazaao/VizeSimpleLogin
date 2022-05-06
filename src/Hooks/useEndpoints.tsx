@@ -59,6 +59,8 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
     if (localToken) {
       setIsLogged(true);
       setToken(localToken);
+    } else {
+      setIsLogged(false);
     }
   }, []);
 
