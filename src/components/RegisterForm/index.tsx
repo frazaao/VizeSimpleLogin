@@ -1,10 +1,18 @@
 import { TextField } from '@mui/material';
 import { FormEvent, useRef } from 'react';
+import { useEndpoints } from '../../Hooks/useEndpoints';
 import { Form, Submit } from './styles';
 
 export default function RegisterForm() {
+  const { POSTREGISTER } = useEndpoints();
+
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    POSTREGISTER({
+      email: userRef.current ? userRef.current.value : '',
+      password: passwordRef.current ? passwordRef.current.value : '',
+      name: nameRef.current ? nameRef.current.value : ''
+    });
   }
 
   const userRef = useRef<HTMLInputElement>(null);
@@ -15,11 +23,6 @@ export default function RegisterForm() {
     <Form
       onSubmit={(e) => {
         handleSubmit(e);
-        console.log({
-          user: userRef.current?.value,
-          password: passwordRef.current?.value,
-          name: nameRef.current?.value
-        });
       }}
     >
       <TextField
