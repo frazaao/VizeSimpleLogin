@@ -50,7 +50,7 @@ const endpointsContext = createContext<endpointsContextProps>({
 
 export default function EndpointsProvider({ children }: EndpointsProps) {
   const [isLogged, setIsLogged] = useState(true);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('jwt'));
   const [error, setError] = useState<string[]>([]);
   const navigate = useNavigate();
 
@@ -126,6 +126,8 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
       setError([]);
       return data;
     } else {
+      setToken('');
+      setIsLogged(false);
       return [];
     }
   }

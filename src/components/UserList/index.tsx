@@ -20,7 +20,7 @@ export default function UserList() {
     GETUSERS().then((data) => {
       setUsers(data);
     });
-  }, [GETUSERS]);
+  }, []);//eslint-disable-line
 
   return (
     <UsersTable>
