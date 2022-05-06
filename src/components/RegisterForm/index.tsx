@@ -2,12 +2,39 @@ import { TextField } from '@mui/material';
 import { FormEvent, useRef } from 'react';
 import { useEndpoints } from '../../Hooks/useEndpoints';
 import { Form, Submit } from './styles';
+import * as yup from 'yup';
+import { toast } from 'react-toastify';
 
 export default function RegisterForm() {
+  const registerSchema = yup.object().shape({
+    name: yup.string().required('O nome é obrigatório'),
+    email: yup
+      .string()
+      .email('Insira um email válido')
+      .required('O email é obrigatório'),
+    password: yup
+      .string()
+      .min(6, 'A senha deve conter no mínimo 6 caracteres')
+      .required('A senha é obrigatória')
+  });
   const { POSTREGISTER } = useEndpoints();
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    try {
+      await registerSchema.validate(
+        {
+          email: userRef.current ? userRef.current.value : '',
+          password: passwordRef.current ? passwordRef.current.value : '',
+          name: nameRef.current ? nameRef.current.value : ''
+        },
+        { abortEarly: false }
+      );
+    } catch (err) {
+      if (err instanceof yup.ValidationError) {
+        err.errors.map((error) => toast.error(error));
+      }
+    }
     POSTREGISTER({
       email: userRef.current ? userRef.current.value : '',
       password: passwordRef.current ? passwordRef.current.value : '',

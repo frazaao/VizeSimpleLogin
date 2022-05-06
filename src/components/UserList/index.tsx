@@ -1,17 +1,45 @@
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useEndpoints, UserType } from '../../Hooks/useEndpoints';
 import { UsersTable } from './styles';
+import { toast } from 'react-toastify';
 
 export default function UserList() {
+  const [users, setUsers] = useState<UserType[]>([]);
+  const { GETUSERS, isLogged } = useEndpoints();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLogged) {
+      toast.error('Você não está logado, faça login primeiro');
+      navigate('/');
+    }
+  }, [isLogged, navigate]);
+
+  useEffect(() => {
+    async () => {
+      const usersFetched = await GETUSERS();
+      setUsers(usersFetched);
+    };
+  }, [GETUSERS]);
+
   return (
     <UsersTable>
       <thead>
         <th>ID</th>
         <th>Nome</th>
+        <th>Email</th>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>User 1</td>
-        </tr>
+        {users.map((user) => {
+          return (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </UsersTable>
   );

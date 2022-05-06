@@ -24,7 +24,7 @@ interface UserFetch {
   data: UserType[];
 }
 
-interface UserType {
+export interface UserType {
   $id: string;
   id: string;
   name: string;
@@ -51,6 +51,7 @@ const endpointsContext = createContext<endpointsContextProps>({
 export default function EndpointsProvider({ children }: EndpointsProps) {
   const [isLogged, setIsLogged] = useState(false);
   const [token, setToken] = useState('');
+  const [error, setError] = useState<string[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,9 +74,8 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
     const { data } = await response.json();
 
-    console.log(response);
-
     if (response.status == 200) {
+      setError([]);
       setToken(data.Token);
       localStorage.setItem('jwt', data.Token);
       setIsLogged(true);
@@ -83,6 +83,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
     } else {
       setToken('');
       setIsLogged(false);
+      setError([...error, 'Falha ao fazer Login, usuário ou senha inválidos']);
     }
   }
 
@@ -96,15 +97,15 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
       }
     );
 
-    const data = await response.json();
-
-    console.log(response, data);
+    await response.json();
 
     if (response.status == 200 || response.status == 201) {
+      setError([]);
       POSTLOGIN({ email, password });
     } else {
       setToken('');
       setIsLogged(false);
+      setError([...error, 'O endereço de email enviado já está registrado']);
     }
   }
 
@@ -119,9 +120,8 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
     const { data }: UserFetch = await response.json();
 
-    console.log(response);
-
     if (response.status == 200) {
+      setError([]);
       return data;
     } else {
       return [];

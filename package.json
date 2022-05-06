@@ -21,11 +21,10 @@
     "@mui/material": "^5.6.3",
     "@mui/styled-engine-sc": "^5.6.1",
     "@types/styled-components": "^5.1.25",
-    "@unform/core": "^2.1.6",
-    "@unform/web": "^2.1.6",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
+    "react-toastify": "^9.0.1",
     "styled-components": "^5.3.5",
     "yup": "^0.32.11"
   },
