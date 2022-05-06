@@ -10,9 +10,10 @@ export const UsersTable = styled.table`
     th {
       border: 2px solid #cce5ff;
       padding: 0.875rem;
-    }
-    th:last-child {
       text-align: left;
+    }
+    th:first-child {
+      text-align: center;
     }
   }
 
