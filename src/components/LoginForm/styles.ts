@@ -11,7 +11,7 @@ export const Submit = styled.button`
   font-weight: 500;
   letter-spacing: 0.1px;
   min-height: 2.5rem;
-  min-width: 16.25rem;
+  min-width: 19.75rem;
 
   &:hover {
     filter: brightness(0.9);
@@ -29,6 +29,6 @@ export const Form = styled.form`
     min-width: 24rem;
   }
   a > button {
-    width: 19.75rem;
+    min-width: 16.25rem;
   }
 `;

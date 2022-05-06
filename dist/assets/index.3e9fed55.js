@@ -91,7 +91,7 @@ attempted value: ${i}
   font-weight: 500;
   letter-spacing: 0.1px;
   min-height: 2.5rem;
-  min-width: 16.25rem;
+  min-width: 19.75rem;
 
   &:hover {
     filter: brightness(0.9);
@@ -107,7 +107,7 @@ attempted value: ${i}
     min-width: 24rem;
   }
   a > button {
-    width: 19.75rem;
+    min-width: 16.25rem;
   }
 `;function R6(){const e=kd().shape({email:lo().email("Insira um email v\xE1lido").required("O email \xE9 obrigat\xF3rio"),password:lo().min(6,"A senha deve conter no m\xEDnimo 6 caracteres").required("A senha \xE9 obrigat\xF3ria")});async function t(i){i.preventDefault();try{await e.validate({email:r.current?r.current.value:"",password:o.current?o.current.value:""},{abortEarly:!1}),n({email:r.current?r.current.value:"",password:o.current?o.current.value:""})}catch(s){s instanceof ut&&s.errors.map(a=>Ee.error(a))}}const{POSTLOGIN:n}=Td(),r=w.exports.useRef(null),o=w.exports.useRef(null);return Le(P6,{onSubmit:i=>{t(i)},children:[N(ci,{inputProps:{ref:r},id:"userInput",label:"Usu\xE1rio",variant:"filled"}),N(ci,{inputProps:{ref:o},type:"password",id:"passwordInput",label:"Senha",variant:"filled"}),N(Hm,{children:"Login"}),N(kS,{to:"/register",children:N(Hm,{children:"Registrar"})})]})}const O6=tr.main`
   height: 100vh;
