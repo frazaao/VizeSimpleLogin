@@ -17,29 +17,34 @@ export default function UserList() {
   }, [isLogged, navigate]);
 
   useEffect(() => {
-    async () => {
-      const usersFetched = await GETUSERS();
-      setUsers(usersFetched);
-    };
+    GETUSERS().then((data) => {
+      setUsers(data);
+    });
   }, [GETUSERS]);
 
   return (
     <UsersTable>
       <thead>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Email</th>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+        </tr>
       </thead>
       <tbody>
-        {users.map((user) => {
-          return (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-            </tr>
-          );
-        })}
+        {users ? (
+          users.map((user) => {
+            return (
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+              </tr>
+            );
+          })
+        ) : (
+          <h1>Carregando</h1>
+        )}
       </tbody>
     </UsersTable>
   );

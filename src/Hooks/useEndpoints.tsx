@@ -49,13 +49,13 @@ const endpointsContext = createContext<endpointsContextProps>({
 });
 
 export default function EndpointsProvider({ children }: EndpointsProps) {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
   const [token, setToken] = useState('');
   const [error, setError] = useState<string[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const localToken = localStorage.getItem('token');
+    const localToken = localStorage.getItem('jwt');
     if (localToken) {
       setIsLogged(true);
       setToken(localToken);
