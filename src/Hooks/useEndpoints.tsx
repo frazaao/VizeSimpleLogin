@@ -63,7 +63,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
   async function POSTLOGIN({ email, password }: POSTLOGINPROPS) {
     const response = await fetch(
-      'https://restapi.adequateshop.com/api/authaccount/login',
+      'http://restapi.adequateshop.com/api/authaccount/login',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -73,7 +73,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
     const { data } = await response.json();
 
-    console.log(data);
+    console.log(response);
 
     if (response.status == 200) {
       setToken(data.Token);
@@ -88,7 +88,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
   async function POSTREGISTER({ email, password, name }: POSTREGISTERPROPS) {
     const response = await fetch(
-      'https://restapi.adequateshop.com/api/authaccount/registration',
+      'http://restapi.adequateshop.com/api/authaccount/registration',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -98,7 +98,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
     const data = await response.json();
 
-    console.log(data);
+    console.log(response, data);
 
     if (response.status == 200 || response.status == 201) {
       POSTLOGIN({ email, password });
@@ -110,7 +110,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
   async function GETUSERS() {
     const response = await fetch(
-      'https://restapi.adequateshop.com/api/users?page=1',
+      'http://restapi.adequateshop.com/api/users?page=1',
       {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` }
@@ -119,7 +119,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
     const { data }: UserFetch = await response.json();
 
-    console.log(data);
+    console.log(response);
 
     if (response.status == 200) {
       return data;
