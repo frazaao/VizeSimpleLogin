@@ -30,16 +30,19 @@ export default function RegisterForm() {
         },
         { abortEarly: false }
       );
+
+      POSTREGISTER({
+        email: userRef.current ? userRef.current.value : '',
+        password: passwordRef.current ? passwordRef.current.value : '',
+        name: nameRef.current ? nameRef.current.value : ''
+      });
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         err.errors.map((error) => toast.error(error));
+      } else {
+        console.log('Erro: ', err);
       }
     }
-    POSTREGISTER({
-      email: userRef.current ? userRef.current.value : '',
-      password: passwordRef.current ? passwordRef.current.value : '',
-      name: nameRef.current ? nameRef.current.value : ''
-    });
   }
 
   const userRef = useRef<HTMLInputElement>(null);
