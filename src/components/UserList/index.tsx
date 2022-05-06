@@ -32,7 +32,7 @@ export default function UserList() {
         </tr>
       </thead>
       <tbody>
-        {users ? (
+        {users.length ? (
           users.map((user) => {
             return (
               <tr key={user.id}>

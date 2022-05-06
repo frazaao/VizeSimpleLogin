@@ -114,6 +114,7 @@ attempted value: ${i}
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;function F6(){return N(O6,{children:N(R6,{})})}const I6=tr.button`
   cursor: pointer;
   background-color: #00639c;
@@ -140,11 +141,12 @@ attempted value: ${i}
   input {
     min-width: 24rem;
   }
-`;function N6(){const e=kd().shape({name:lo().required("O nome \xE9 obrigat\xF3rio"),email:lo().email("Insira um email v\xE1lido").required("O email \xE9 obrigat\xF3rio"),password:lo().min(6,"A senha deve conter no m\xEDnimo 6 caracteres").required("A senha \xE9 obrigat\xF3ria")}),{POSTREGISTER:t}=Td();async function n(s){s.preventDefault();try{await e.validate({email:r.current?r.current.value:"",password:i.current?i.current.value:"",name:o.current?o.current.value:""},{abortEarly:!1})}catch(a){a instanceof ut&&a.errors.map(l=>Ee.error(l))}t({email:r.current?r.current.value:"",password:i.current?i.current.value:"",name:o.current?o.current.value:""})}const r=w.exports.useRef(null),o=w.exports.useRef(null),i=w.exports.useRef(null);return Le(A6,{onSubmit:s=>{n(s)},children:[N(ci,{inputProps:{ref:r},id:"userInput",label:"Usu\xE1rio",variant:"filled"}),N(ci,{inputProps:{ref:i},type:"password",id:"passwordInput",label:"Senha",variant:"filled"}),N(ci,{inputProps:{ref:o},id:"nameInput",label:"Nome",variant:"filled"}),N(I6,{children:"Registrar"})]})}const M6=tr.main`
+`;function N6(){const e=kd().shape({name:lo().required("O nome \xE9 obrigat\xF3rio"),email:lo().email("Insira um email v\xE1lido").required("O email \xE9 obrigat\xF3rio"),password:lo().min(6,"A senha deve conter no m\xEDnimo 6 caracteres").required("A senha \xE9 obrigat\xF3ria")}),{POSTREGISTER:t}=Td();async function n(s){s.preventDefault();try{await e.validate({email:r.current?r.current.value:"",password:i.current?i.current.value:"",name:o.current?o.current.value:""},{abortEarly:!1}),t({email:r.current?r.current.value:"",password:i.current?i.current.value:"",name:o.current?o.current.value:""})}catch(a){a instanceof ut&&a.errors.map(l=>Ee.error(l))}}const r=w.exports.useRef(null),o=w.exports.useRef(null),i=w.exports.useRef(null);return Le(A6,{onSubmit:s=>{n(s)},children:[N(ci,{inputProps:{ref:r},id:"userInput",label:"Usu\xE1rio",variant:"filled"}),N(ci,{inputProps:{ref:i},type:"password",id:"passwordInput",label:"Senha",variant:"filled"}),N(ci,{inputProps:{ref:o},id:"nameInput",label:"Nome",variant:"filled"}),N(I6,{children:"Registrar"})]})}const M6=tr.main`
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;function L6(){return N(M6,{children:N(N6,{})})}const z6=tr.table`
   font-family: 'Roboto', Arial, sans-serif;
   width: 100%;
@@ -180,7 +182,10 @@ attempted value: ${i}
       }
     }
   }
-`;function D6(){const[e,t]=w.exports.useState([]),{GETUSERS:n,isLogged:r}=Td(),o=Hf();return w.exports.useEffect(()=>{r||(Ee.error("Voc\xEA n\xE3o est\xE1 logado, fa\xE7a login primeiro"),o("/"))},[r,o]),w.exports.useEffect(()=>{n().then(i=>{t(i)})},[n]),Le(z6,{children:[N("thead",{children:Le("tr",{children:[N("th",{children:"ID"}),N("th",{children:"Nome"}),N("th",{children:"Email"})]})}),N("tbody",{children:e?e.map(i=>Le("tr",{children:[N("td",{children:i.id}),N("td",{children:i.name}),N("td",{children:i.email})]},i.id)):N("h1",{children:"Carregando"})})]})}const j6=tr.main`
+  h1 {
+    margin-top: 2rem;
+  }
+`;function D6(){const[e,t]=w.exports.useState([]),{GETUSERS:n,isLogged:r}=Td(),o=Hf();return w.exports.useEffect(()=>{r||(Ee.error("Voc\xEA n\xE3o est\xE1 logado, fa\xE7a login primeiro"),o("/"))},[r,o]),w.exports.useEffect(()=>{n().then(i=>{t(i)})},[n]),Le(z6,{children:[N("thead",{children:Le("tr",{children:[N("th",{children:"ID"}),N("th",{children:"Nome"}),N("th",{children:"Email"})]})}),N("tbody",{children:e.length?e.map(i=>Le("tr",{children:[N("td",{children:i.id}),N("td",{children:i.name}),N("td",{children:i.email})]},i.id)):N("h1",{children:"Carregando"})})]})}const j6=tr.main`
   height: 100vh;
   max-width: 1280px;
   margin: 0 auto;

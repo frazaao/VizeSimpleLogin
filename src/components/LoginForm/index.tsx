@@ -38,8 +38,6 @@ export default function LoginForm() {
     } catch (err) {
       if (err instanceof yup.ValidationError) {
         err.errors.map((error) => toast.error(error));
-      } else {
-        console.log('Erro: ', err);
       }
     }
   }

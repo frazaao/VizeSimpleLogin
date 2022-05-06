@@ -35,4 +35,7 @@ export const UsersTable = styled.table`
       }
     }
   }
+  h1 {
+    margin-top: 2rem;
+  }
 `;
