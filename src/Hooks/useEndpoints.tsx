@@ -91,7 +91,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
   async function POSTREGISTER({ email, password, name }: POSTREGISTERPROPS) {
     const response = await fetch(
-      'http://restapi.adequateshop.com/api/authaccount/registration',
+      'http://cors-anywhere.herokuapp.com/http://restapi.adequateshop.com/api/authaccount/registration',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
