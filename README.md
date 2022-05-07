@@ -27,7 +27,10 @@ Este projeto contém algumas dependências de **lint** e padronização de códi
 - [Lint-staged](https://www.npmjs.com/package/lint-staged)
 - [Prettier](https://www.npmjs.com/package/prettier)
 
-E lembre-se, caso deseja utilizar o ESLint lembre-se de instalar ou ativar a extensão ESLint para a sua **IDE**
+Em uma das requisições, eu utilizo um proxy para fazer uma chamada HTTP, esse proxy é o [**Cors-anywhere**](https://cors-anywhere.herokuapp.com/), ele garante que as requisições cheguem sem o erro de CORS: "Access-Control-Allow-Origin", que se dá devido à uma falta deste header por parte do servidor, ou não aponta para o endereço da aplicação.
+
+E lembre-se, caso deseja utilizar o ESLint você deve instalar ou ativar a extensão ESLint para a sua **IDE**
+-
 
 ## 🚀Instalação
 
