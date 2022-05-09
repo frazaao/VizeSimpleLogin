@@ -78,8 +78,6 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
     const data = await response.json();
 
-    console.log(data);
-
     if (response.status == 200 && data.code == 0) {
       setError([]);
       setToken(data.data.Token);
@@ -90,7 +88,6 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
       setToken('');
       setIsLogged(false);
       setError([...error, 'Falha ao fazer Login, usuário ou senha inválidos']);
-      console.log(error);
     }
   }
 
