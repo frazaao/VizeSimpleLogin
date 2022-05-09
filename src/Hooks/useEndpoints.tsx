@@ -39,13 +39,15 @@ interface endpointsContextProps {
   POSTREGISTER: (POSTREGISTERPROPS: POSTREGISTERPROPS) => void;
   GETUSERS: () => Promise<UserType[]>;
   isLogged: boolean;
+  error: string[];
 }
 
 const endpointsContext = createContext<endpointsContextProps>({
   POSTLOGIN: async () => {},
   POSTREGISTER: async () => {},
   GETUSERS: async () => [],
-  isLogged: false
+  isLogged: false,
+  error: []
 });
 
 export default function EndpointsProvider({ children }: EndpointsProps) {
@@ -74,18 +76,21 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
       }
     );
 
-    const { data } = await response.json();
+    const data = await response.json();
 
-    if (response.status == 200) {
+    console.log(data);
+
+    if (response.status == 200 && data.code == 0) {
       setError([]);
-      setToken(data.Token);
-      localStorage.setItem('jwt', data.Token);
+      setToken(data.data.Token);
+      localStorage.setItem('jwt', data.data.Token);
       setIsLogged(true);
       navigate('/users');
     } else {
       setToken('');
       setIsLogged(false);
       setError([...error, 'Falha ao fazer Login, usuário ou senha inválidos']);
+      console.log(error);
     }
   }
 
@@ -99,9 +104,9 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
       }
     );
 
-    await response.json();
+    const { data } = await response.json();
 
-    if (response.status == 200 || response.status == 201) {
+    if ((response.status == 200 || response.status == 201) && data.code == 0) {
       setError([]);
       POSTLOGIN({ email, password });
     } else {
@@ -134,7 +139,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 
   return (
     <endpointsContext.Provider
-      value={{ POSTLOGIN, POSTREGISTER, GETUSERS, isLogged }}
+      value={{ POSTLOGIN, POSTREGISTER, GETUSERS, isLogged, error }}
     >
       {children}
     </endpointsContext.Provider>
@@ -144,7 +149,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
 export function useEndpoints() {
   const context = useContext(endpointsContext);
 
-  const { POSTLOGIN, POSTREGISTER, GETUSERS, isLogged } = context;
+  const { POSTLOGIN, POSTREGISTER, GETUSERS, isLogged, error } = context;
 
-  return { POSTLOGIN, POSTREGISTER, GETUSERS, isLogged };
+  return { POSTLOGIN, POSTREGISTER, GETUSERS, isLogged, error };
 }

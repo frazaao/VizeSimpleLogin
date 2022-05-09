@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { useEndpoints } from '../../Hooks/useEndpoints';
 import { Form, Submit } from './styles';
 import * as yup from 'yup';
@@ -17,7 +17,11 @@ export default function RegisterForm() {
       .min(6, 'A senha deve conter no mínimo 6 caracteres')
       .required('A senha é obrigatória')
   });
-  const { POSTREGISTER } = useEndpoints();
+  const { POSTREGISTER, error } = useEndpoints();
+
+  useEffect(() => {
+    error.map((err) => toast.error(err));
+  }, [error]);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();

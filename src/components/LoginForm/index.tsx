@@ -1,4 +1,4 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { TextField } from '@mui/material';
 import * as yup from 'yup';
@@ -9,6 +9,8 @@ import { useEndpoints } from '../../Hooks/useEndpoints';
 import { Form, Submit } from './styles';
 
 export default function LoginForm() {
+  const { POSTLOGIN, error } = useEndpoints();
+
   const loginSchema = yup.object().shape({
     email: yup
       .string()
@@ -19,6 +21,10 @@ export default function LoginForm() {
       .min(6, 'A senha deve conter no mínimo 6 caracteres')
       .required('A senha é obrigatória')
   });
+
+  useEffect(() => {
+    error.map((err) => toast.error(err));
+  }, [error]);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -41,8 +47,6 @@ export default function LoginForm() {
       }
     }
   }
-
-  const { POSTLOGIN } = useEndpoints();
 
   const userRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
