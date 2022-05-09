@@ -77,6 +77,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
     );
 
     const data = await response.json();
+    console.log(data);
 
     if (response.status == 200 && data.code == 0) {
       setError([]);
@@ -102,6 +103,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
     );
 
     const { data } = await response.json();
+    console.log(data);
 
     if ((response.status == 200 || response.status == 201) && data.code == 0) {
       setError([]);
