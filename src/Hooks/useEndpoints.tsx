@@ -104,7 +104,7 @@ export default function EndpointsProvider({ children }: EndpointsProps) {
       }
     );
 
-    const data = await response.json();
+    const { data } = await response.json();
 
     if ((response.status == 200 || response.status == 201) && data.code == 0) {
       setError([]);
